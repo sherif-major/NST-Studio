@@ -1,0 +1,36 @@
+# =========================
+# Python Backend
+# =========================
+
+backend/venv/
+backend/__pycache__/
+backend/**/*.pyc
+
+# Generated AI outputs
+backend/data/output-images/
+backend/data/content-images/
+
+# Python env files
+.env
+.env.*
+
+# =========================
+# Frontend (Vue + Vite)
+# =========================
+
+frontend/node_modules/
+frontend/dist/
+
+# Vite cache
+frontend/.vite/
+
+# VSCode
+frontend/.vscode/
+.vscode/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
