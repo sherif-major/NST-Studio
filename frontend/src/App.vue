@@ -226,6 +226,13 @@
         </div>
       </div>
     </section>
+    <button
+      v-if="showScrollTop"
+      class="scroll-top-btn"
+      @click="scrollToTop"
+    >
+      ↑
+    </button>
   </main>
 </template>
 
@@ -247,6 +254,7 @@ const loading = ref(false);
 
 const showMockup = ref(false);
 const selectedTshirtColor = ref("white");
+const showScrollTop = ref(false);
 
 const tshirtMockups = {
   white: {
@@ -321,6 +329,13 @@ const downloadImage = () => {
   link.click();
 };
 
+const scrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+};
+
 const cleanStyleName = (name) => {
   return name
     .replace(/\.[^/.]+$/, "")
@@ -328,7 +343,13 @@ const cleanStyleName = (name) => {
     .replace(/\b\w/g, (char) => char.toUpperCase());
 };
 
-onMounted(getStyles);
+onMounted(() => {
+  getStyles();
+
+  window.addEventListener("scroll", () => {
+    showScrollTop.value = window.scrollY > 500;
+  });
+});
 </script>
 
 <style scoped>
@@ -889,5 +910,27 @@ button {
   to {
     transform: rotate(360deg);
   }
+}
+
+.scroll-top-btn {
+  position: fixed;
+  right: 34px;
+  bottom: 34px;
+  width: 58px;
+  height: 58px;
+  border: none;
+  background: #111111;
+  color: #ffffff;
+  font-size: 26px;
+  font-weight: 900;
+  cursor: pointer;
+  z-index: 999;
+  transition: 0.25s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+.scroll-top-btn:hover {
+  transform: translateY(-4px);
+  background: #333333;
 }
 </style>
